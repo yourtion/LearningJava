@@ -11,7 +11,7 @@
         
             <interceptor-ref name="fileUpload">
                	<param name="allowedTypes">text/plain,image/png,image/gif,image/jpeg</param>
-                <param name="maximumSize">2048000</param>
+                <param name="maximumSize">204800</param>
             </interceptor-ref>
 
             <interceptor-ref name="defaultStack"></interceptor-ref>
@@ -27,6 +27,19 @@
             <result name="success">/success.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
+        
+	</package>
+        
+    <package name="shiyanlou.struts.download" extends="struts-default">
+        <action name="download" class="shiyanlou.struts.DownloadAction" method="execute">
+     		<param name="downloadPath">/uploadMultiFiles</param>
+        	<result name="success" type="stream">
+           		<param name="inputName">targetFile</param>
+          		<!-- <param name="contentType">image/jpg</param> -->
+           		<param name="contentDisposition">attachment;filename=${filename}</param>
+           		<param name="bufferSize">4096</param>
+      		</result>
+   		</action>
     </package>  
 
 </struts>

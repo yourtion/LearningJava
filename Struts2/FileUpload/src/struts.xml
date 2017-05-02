@@ -1,32 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC
-    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-    "http://struts.apache.org/dtds/struts-2.3.dtd">
+  "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+  "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
 
-    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
-	<package name="shiyanlou.struts" extends="struts-default">
-        <action name="multiUpload" class="shiyanlou.struts.MultiUploadAction" method="execute">
-        
-            <interceptor-ref name="fileUpload">
-               	<param name="allowedTypes">text/plain,image/png,image/gif,image/jpeg</param>
-                <param name="maximumSize">2048000</param>
-            </interceptor-ref>
+  <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+  <package name="shiyanlou.struts" extends="struts-default">
+    <action name="multiUpload" class="shiyanlou.struts.MultiUploadAction" method="execute">
+    
+      <interceptor-ref name="fileUpload">
+        <param name="allowedTypes">text/plain,image/png,image/gif,image/jpeg</param>
+        <param name="maximumSize">204800</param>
+      </interceptor-ref>
 
-            <interceptor-ref name="defaultStack"></interceptor-ref>
+      <interceptor-ref name="defaultStack"></interceptor-ref>
 
-            <param name="savePath">/uploadMultiFiles</param>
-            <result name="success">/success.jsp</result>
-            <result name="error">/error.jsp</result>
-            <result name="input">/index.jsp</result>
-        </action>
+      <param name="savePath">/uploadMultiFiles</param>
+      <result name="success">/success.jsp</result>
+      <result name="error">/error.jsp</result>
+      <result name="input">/index.jsp</result>
+    </action>
 
-        <action name="upload" class="shiyanlou.struts.UploadAction" method="execute">
-        	<param name="savePath">/uploadFiles</param>
-            <result name="success">/success.jsp</result>
-            <result name="error">/error.jsp</result>
-        </action>
-    </package>  
+    <action name="upload" class="shiyanlou.struts.UploadAction" method="execute">
+      <param name="savePath">/uploadFiles</param>
+      <result name="success">/success.jsp</result>
+      <result name="error">/error.jsp</result>
+    </action>
+    
+  </package>
+    
+  <package name="shiyanlou.struts.download" extends="struts-default">
+    <action name="download" class="shiyanlou.struts.DownloadAction" method="execute">
+      <param name="downloadPath">/uploadMultiFiles</param>
+      <result name="success" type="stream">
+        <param name="inputName">targetFile</param>
+        <!-- <param name="contentType">image/jpg</param> -->
+        <param name="contentDisposition">attachment;filename=${filename}</param>
+        <param name="bufferSize">4096</param>
+      </result>
+    </action>
+  </package>  
 
 </struts>
