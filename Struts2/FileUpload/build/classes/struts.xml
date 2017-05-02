@@ -6,8 +6,22 @@
 <struts>
 
     <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<package name="shiyanlou.struts" extends="struts-default">
+        <action name="multiUpload" class="shiyanlou.struts.MultiUploadAction" method="execute">
+        
+            <interceptor-ref name="fileUpload">
+               	<param name="allowedTypes">text/plain,image/png,image/gif,image/jpeg</param>
+                <param name="maximumSize">2048000</param>
+            </interceptor-ref>
 
-    <package name="shiyanlou.struts" extends="struts-default">
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+
+            <param name="savePath">/uploadMultiFiles</param>
+            <result name="success">/success.jsp</result>
+            <result name="error">/error.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+
         <action name="upload" class="shiyanlou.struts.UploadAction" method="execute">
         	<param name="savePath">/uploadFiles</param>
             <result name="success">/success.jsp</result>
