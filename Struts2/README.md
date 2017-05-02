@@ -1,9 +1,15 @@
-shiyanlou_cs32
-==============
+# shiyanlou_cs32
 
 实验楼课程: [Struts框架教程](https://www.shiyanlou.com/courses/32) 相关代码
 
-### Libs
+## 实验环境
+
+- Tomcat 7
+- JDK1.7
+- Eclipse JavaEE
+- Firefox浏览器
+
+## Libs
 
 - commons-fileupload-1.3.1.jar 
 - commons-io-2.2.jar 
