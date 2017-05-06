@@ -3,10 +3,9 @@ package com.yourtion.demo.spring3_Example;
 /**
  * Created by yourtion on 06/05/2017.
  */
+import com.yourtion.demo.loosely_coupled.OutputHelper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.yourtion.demo.helloworld.HelloWorld;
 
 public class App {
 
@@ -14,10 +13,10 @@ public class App {
 
     public static void main( String[] args )
     {
-        context = new ClassPathXmlApplicationContext("SpringBeans.xml");
+        context = new ClassPathXmlApplicationContext(new String[] {"Spring-Output.xml"});
 
-        HelloWorld obj = (HelloWorld) context.getBean("helloBean");
-        obj.printHello();
+        OutputHelper output = (OutputHelper)context.getBean("OutputHelper");
+        output.generateOutput();
     }
 
 }
