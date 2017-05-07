@@ -1,5 +1,6 @@
 package com.yourtion.demo.bean;
 
+import com.yourtion.demo.innerBean.Customer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -13,7 +14,7 @@ public class App {
     {
         context = new ClassPathXmlApplicationContext("SpringBeans.xml");
 
-        FileNameGenerator obj = (FileNameGenerator) context.getBean("FileNameGenerator");
-        obj.printFileName();
+        Customer obj = (Customer) context.getBean("CustomerBean");
+        System.out.println(obj.toString());
     }
 }

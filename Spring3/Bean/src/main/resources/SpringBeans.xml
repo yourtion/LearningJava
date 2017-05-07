@@ -10,4 +10,14 @@
         <property name="type" value="txt" />
     </bean>
 
+    <bean id="CustomerBean" class="com.yourtion.demo.innerBean.Customer">
+        <property name="person">
+            <bean class="com.yourtion.demo.innerBean.Person">
+                <property name="name" value="Yourtion" />
+                <property name="addrss" value="Guangdong" />
+                <property name="age" value="28" />
+            </bean>
+        </property>
+    </bean>
+
 </beans>
