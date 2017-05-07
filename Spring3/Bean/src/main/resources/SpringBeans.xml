@@ -20,4 +20,7 @@
         </property>
     </bean>
 
+    <bean id="CustomerServiceDefault"  class="com.yourtion.demo.customerServices.CustomerService" />
+    <bean id="CustomerServicePrototype"  class="com.yourtion.demo.customerServices.CustomerService" scope="prototype" />
+
 </beans>
