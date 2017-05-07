@@ -1,6 +1,6 @@
 package com.yourtion.demo.bean;
 
-import com.yourtion.demo.customerServices.CustomerService;
+import com.yourtion.demo.collections.Customer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -14,24 +14,21 @@ public class App {
     {
         context = new ClassPathXmlApplicationContext(new String[] {"SpringBeans.xml"});
 
-        System.out.println("Default: ");
+        System.out.println("List: ");
 
-        CustomerService CSDA = (CustomerService) context.getBean("CustomerServiceDefault");
-        CSDA.setMessage("Message by CSDA");
-        System.out.println("Message : "+ CSDA.getMessage());
+        Customer lists = (Customer) context.getBean("customerBean");
+        System.out.println(lists.getLists().toString());
 
-        //retrieve it again
-        CustomerService CSDB = (CustomerService) context.getBean("CustomerServiceDefault");
-        System.out.println("Message : "+ CSDB.getMessage());
+        System.out.println("Set: ");
+        Customer sets = (Customer) context.getBean("customerBean");
+        System.out.println(sets.getSets().toString());
 
-        System.out.println("Prototype: ");
+        System.out.println("Map: ");
+        Customer maps = (Customer) context.getBean("customerBean");
+        System.out.println(maps.getMaps().toString());
 
-        CustomerService CSPA = (CustomerService) context.getBean("CustomerServicePrototype");
-        CSPA.setMessage("Message by CSPA");
-        System.out.println("Message : "+ CSPA.getMessage());
-
-        //retrieve it again
-        CustomerService CSPB = (CustomerService) context.getBean("CustomerServicePrototype");
-        System.out.println("Message : "+ CSPB.getMessage());
+        System.out.println("Prop: ");
+        Customer pros = (Customer) context.getBean("customerBean");
+        System.out.println(pros.getPros().toString());
     }
 }

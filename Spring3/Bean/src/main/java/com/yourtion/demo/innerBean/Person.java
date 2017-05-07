@@ -5,7 +5,7 @@ package com.yourtion.demo.innerBean;
  */
 public class Person {
     private String name;
-    private String addrss;
+    private String address;
     private int age;
 
     public String getName() {
@@ -16,12 +16,12 @@ public class Person {
         this.name = name;
     }
 
-    public String getAddrss() {
-        return addrss;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddrss(String addrss) {
-        this.addrss = addrss;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getAge() {
@@ -34,6 +34,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person [address=" + addrss + ", age=" + age +", name=" + name + "]";
+        return "Person [address=" + address + ", age=" + age +", name=" + name + "]";
     }
 }
