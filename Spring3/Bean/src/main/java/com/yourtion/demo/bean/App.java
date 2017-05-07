@@ -1,7 +1,10 @@
 package com.yourtion.demo.bean;
 
 import com.yourtion.demo.collections.Customer;
+import com.yourtion.demo.innerBean.Person;
+import com.yourtion.demo.java_config.AppConfig;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -12,23 +15,8 @@ public class App {
 
     public static void main( String[] args )
     {
-        context = new ClassPathXmlApplicationContext(new String[] {"SpringBeans.xml"});
-
-        System.out.println("List: ");
-
-        Customer lists = (Customer) context.getBean("customerBean");
-        System.out.println(lists.getLists().toString());
-
-        System.out.println("Set: ");
-        Customer sets = (Customer) context.getBean("customerBean");
-        System.out.println(sets.getSets().toString());
-
-        System.out.println("Map: ");
-        Customer maps = (Customer) context.getBean("customerBean");
-        System.out.println(maps.getMaps().toString());
-
-        System.out.println("Prop: ");
-        Customer pros = (Customer) context.getBean("customerBean");
-        System.out.println(pros.getPros().toString());
+        context = new AnnotationConfigApplicationContext(AppConfig.class);
+        Person obj = (Person) context.getBean("Admin");
+        System.out.println(obj);
     }
 }
