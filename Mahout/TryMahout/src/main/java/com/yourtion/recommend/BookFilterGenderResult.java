@@ -31,23 +31,39 @@ public class BookFilterGenderResult {
         RecommenderBuilder rb2 = BookEvaluator.itemEuclidean(dataModel);
         RecommenderBuilder rb3 = BookEvaluator.userEuclideanNoPref(dataModel);
         RecommenderBuilder rb4 = BookEvaluator.itemEuclideanNoPref(dataModel);
+        System.out.println("");
 
-        long uid = 59;
+        System.out.println("User 59: ");
+        long uid1 = 59;
         System.out.print("userEuclidean       => ");
-        filterGender(uid, rb1, dataModel);
+        filterGender(uid1, "F", rb1, dataModel);
         System.out.print("itemEuclidean       => ");
-        filterGender(uid, rb2, dataModel);
+        filterGender(uid1, "F", rb2, dataModel);
         System.out.print("userEuclideanNoPref => ");
-        filterGender(uid, rb3, dataModel);
+        filterGender(uid1, "F", rb3, dataModel);
         System.out.print("itemEuclideanNoPref => ");
-        filterGender(uid, rb4, dataModel);
+        filterGender(uid1, "F", rb4, dataModel);
+        System.out.println("");
+
+        System.out.println("User 65: ");
+        long uid2 = 65;
+        System.out.print("userEuclidean       => ");
+        filterGender(uid2, "M", rb1, dataModel);
+        System.out.print("itemEuclidean       => ");
+        filterGender(uid2, "M", rb2, dataModel);
+        System.out.print("userEuclideanNoPref => ");
+        filterGender(uid2, "M", rb3, dataModel);
+        System.out.print("itemEuclideanNoPref => ");
+        filterGender(uid2, "M", rb4, dataModel);
+
     }
 
     /**
      * 对用户性别进行过滤
      */
-    private static void filterGender(long uid, RecommenderBuilder recommenderBuilder, DataModel dataModel) throws TasteException, IOException {
-        Set<Long> userids = getFemale("datafile/book/user.csv");
+    private static void filterGender(long uid, String gender, RecommenderBuilder recommenderBuilder, DataModel dataModel) throws TasteException, IOException {
+        Set<Long> userids = getGender("datafile/book/user.csv", gender);
+
 
         //计算男性用户打分过的图书
         Set<Long> bookids = new HashSet<Long>();
@@ -65,32 +81,15 @@ public class BookFilterGenderResult {
     }
 
     /**
-     * 获得男性用户ID
+     * 获得特定性别用户ID
      */
-    public static Set<Long> getMale(String file) throws IOException {
+    private static Set<Long> getGender(String file, String gender) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(new File(file)));
         Set<Long> userids = new HashSet<Long>();
         String s = null;
         while ((s = br.readLine()) != null) {
             String[] cols = s.split(",");
-            if (cols[1].equals("M")) {// 判断男性用户
-                userids.add(Long.parseLong(cols[0]));
-            }
-        }
-        br.close();
-        return userids;
-    }
-
-    /**
-     * 获得女性用户ID
-     */
-    private static Set<Long> getFemale(String file) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(new File(file)));
-        Set<Long> userids = new HashSet<Long>();
-        String s = null;
-        while ((s = br.readLine()) != null) {
-            String[] cols = s.split(",");
-            if (cols[1].equals("F")) {// 判断男性用户
+            if (cols[1].equals(gender)) {// 判断性别
                 userids.add(Long.parseLong(cols[0]));
             }
         }
