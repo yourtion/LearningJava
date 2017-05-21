@@ -8,11 +8,10 @@
   <packaging>jar</packaging>
 
   <name>TryMahout</name>
-  <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <mahout.version>0.8</mahout.version>
+    <mahout.version>0.12.0</mahout.version>
   </properties>
 
   <dependencies>
