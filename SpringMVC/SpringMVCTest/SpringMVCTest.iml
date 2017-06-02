@@ -23,7 +23,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.14" level="application_server_libraries" />
+    <orderEntry type="library" scope="RUNTIME" name="Tomcat 7.0.77" level="application_server_libraries" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>

@@ -1,11 +1,34 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="SpringMVCTest:war exploded">
+  <artifact type="exploded-war" build-on-make="true" name="SpringMVCTest:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/SpringMVCTest_war_exploded</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="SpringMVCTest/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="SpringMVCTest" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/commons-logging-1.2.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-tx-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-aop-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-jms-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-orm-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-oxm-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-web-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-core-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-jdbc-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-test-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-beans-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-webmvc-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-aspects-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-context-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-messaging-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-websocket-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-expression-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-instrument-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-webmvc-portlet-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-context-support-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-instrument-tomcat-4.2.0.RELEASE.jar" />
         </element>
       </element>
     </root>
