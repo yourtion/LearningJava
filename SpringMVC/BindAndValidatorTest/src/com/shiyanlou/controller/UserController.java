@@ -1,7 +1,10 @@
 package com.shiyanlou.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,7 +27,10 @@ public class UserController {
 
     // 注册请求的响应方法
     @RequestMapping(value = "/register")
-    public String register(@ModelAttribute("user") User user, Model model) {
+    public String register(@Valid @ModelAttribute("user") User user, Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            return "register";
+        }
         model.addAttribute("user", user);
         return "success";
     }

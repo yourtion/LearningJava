@@ -14,22 +14,27 @@
             <p>
                 <label>name:</label>
                 <form:input path="username" />
+                <form:errors path="username" cssStyle="color:red"/>
             </p>
             <p>
                 <label>password:</label>
                 <form:password path="password" />
+                <form:errors path="password" cssStyle="color:red"/>
             </p>
             <p>
                 <label>age:</label>
                 <form:input path="age" />
+                <form:errors path="age" cssStyle="color:red"/>
             </p>
             <p>
                 <label>phone:</label>
                 <form:input path="phone" />
+                <form:errors path="phone" cssStyle="color:red"/>
             </p>
             <p>
                 <label>email:</label>
                 <form:input path="email" />
+                <form:errors path="email" cssStyle="color:red"/>
             </p>
             <p id="buttons">
                 <input id="submit" type="submit" value="register"> <input

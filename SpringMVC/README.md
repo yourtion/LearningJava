@@ -11,6 +11,9 @@
 
 ## Libs
 
+- hibernate-validator-5.4.1.Final.jar
+- hibernate-validator-annotation-processor-5.4.1.Final.jar
+- hibernate-validator-cdi-5.4.1.Final.jar
 - spring-context-4.2.0.RELEASE.jar
 - spring-core-4.2.0.RELEASE.jar
 - spring-webmvc-4.2.0.RELEASE.jar
@@ -32,3 +35,4 @@
 - spring-aspects-4.2.0.RELEASE.jar
 - spring-instrument-tomcat-4.2.0.RELEASE.jar
 - spring-instrument-4.2.0.RELEASE.jar
+- validation-api-1.1.0.Final.jar
