@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shiyanlou.entity.User;
 
+import static javax.swing.text.StyleConstants.ModelAttribute;
+
 /**
  * UserController
  * BindAndValidatorTest - com.shiyanlou.controller

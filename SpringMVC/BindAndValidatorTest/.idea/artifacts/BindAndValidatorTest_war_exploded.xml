@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="BindAndValidatorTest:war exploded">
+  <artifact type="exploded-war" build-on-make="true" name="BindAndValidatorTest:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/BindAndValidatorTest_war_exploded</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="BindAndValidatorTest/web/Web" />
@@ -29,6 +29,10 @@
           <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-webmvc-portlet-4.2.0.RELEASE.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-context-support-4.2.0.RELEASE.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/web/lib/spring-instrument-tomcat-4.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/validation-api-1.1.0.Final.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/hibernate-validator-5.4.1.Final.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/hibernate-validator-cdi-5.4.1.Final.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/lib/hibernate-validator-annotation-processor-5.4.1.Final.jar" />
         </element>
       </element>
     </root>
