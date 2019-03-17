@@ -23,7 +23,6 @@
         <log4j.version>1.2.17</log4j.version>
         <mysql.version>5.1.44</mysql.version>
         <druid.version>1.1.3</druid.version>
-        <guava.version>27.0</guava.version>
         <joda-time.version>2.9.2</joda-time.version>
         <cglib.version>3.1</cglib.version>
 
@@ -64,13 +63,6 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
-        </dependency>
-
-        <!--guava-->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
         </dependency>
 
         <!-- time -->
@@ -132,10 +124,6 @@
                 <exclusion>
                     <artifactId>curator-client</artifactId>
                     <groupId>org.apache.curator</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>guava</artifactId>
-                    <groupId>com.google.guava</groupId>
                 </exclusion>
                 <exclusion>
                     <artifactId>spring-web</artifactId>
