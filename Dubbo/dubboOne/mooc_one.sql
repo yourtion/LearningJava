@@ -1,24 +1,5 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : 本地数据库
-Source Server Version : 50640
-Source Host           : localhost:3306
-Source Database       : mooc_one
-
-Target Server Type    : MYSQL
-Target Server Version : 50640
-File Encoding         : 65001
-
-Date: 2019-01-13 17:06:33
-*/
-
-SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for item_info
--- ----------------------------
 DROP TABLE IF EXISTS `item_info`;
+
 CREATE TABLE `item_info`
 (
   `id`          int(11)   NOT NULL AUTO_INCREMENT COMMENT '主键',
@@ -37,17 +18,11 @@ CREATE TABLE `item_info`
 -- ----------------------------
 -- Records of item_info
 -- ----------------------------
-INSERT INTO `item_info`
-VALUES ('1', '10010', 'Java编程思想', '58.50', '1', '2019-01-13 14:07:58', null);
-INSERT INTO `item_info`
-VALUES ('2', '10011', '由浅入深实战分布式中间件', '45.50', '1', '2019-01-13 14:07:59', null);
-INSERT INTO `item_info`
-VALUES ('3', '10012', 'Dubbo实战教程', '68.00', '1', '2019-01-13 14:07:59', null);
-INSERT INTO `item_info`
-VALUES ('4', '10013', 'JVM深入实战指南', '38.50', '1', '2019-01-13 14:07:59', null);
-INSERT INTO `item_info`
-VALUES ('5', '10014', 'SpringBoot实战', '56.50', '1', '2019-01-13 14:07:59', null);
-INSERT INTO `item_info`
-VALUES ('6', '10015', 'SpringCloud实战', '64.00', '1', '2019-01-13 14:07:59', null);
-INSERT INTO `item_info`
-VALUES ('7', '10017', 'Mysql实战指南', '75.50', '1', '2019-01-13 14:07:59', null);
+INSERT INTO `item_info` (`id`, `code`, `name`, `price`, `is_active`)
+VALUES (1, '10010', 'Java编程思想', 58.50, 1),
+       (2, '10011', '由浅入深实战分布式中间件', 45.50, 1),
+       (3, '10012', 'Dubbo实战教程', 68.00, 1),
+       (4, '10013', 'JVM深入实战指南', 38.50, 1),
+       (5, '10014', 'SpringBoot实战', 56.50, 1),
+       (6, '10015', 'SpringCloud实战', 64.00, 1),
+       (7, '10017', 'Mysql实战指南', 75.50, 1);
