@@ -14,7 +14,7 @@ public class AuthenticationTest {
 
     @Before
     public void addUser() {
-        simpleAccountRealm.addAccount("Yourtion", "123456");
+        simpleAccountRealm.addAccount("Yourtion", "123456", "admin", "user");
     }
 
     @Test
@@ -35,8 +35,7 @@ public class AuthenticationTest {
         subject.login(token);
         System.out.println("isAuthenticated: " + subject.isAuthenticated());
 
-        // 4. 登出
-        subject.logout();
-        System.out.println("isAuthenticated: " + subject.isAuthenticated());
+        subject.checkRole("admin");
+        subject.checkRoles("admin", "user");
     }
 }
