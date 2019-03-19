@@ -7,8 +7,10 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -19,7 +21,7 @@ public class CustomRealm extends AuthorizingRealm {
     Map<String, String> userMap = new HashedMap(16);
 
     {
-        userMap.put("Yourtion", "123456");
+        userMap.put("Yourtion", "588d4112a1e18fa9a39e7007103fcd7f");
         super.setName("customRealm");
     }
 
@@ -57,6 +59,18 @@ public class CustomRealm extends AuthorizingRealm {
         return sets;
     }
 
+    public static void main(String[] args) {
+        Md5Hash md5Hash = new Md5Hash("123456", "GYX");
+        System.out.println(md5Hash);
+    }
+
+    /**
+     * 模拟数据库查询凭证
+     */
+    private String getPasswordByUserName(String userName) {
+        return userMap.get(userName);
+    }
+
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         // 1. 从主体传入信息获取用户名
@@ -70,13 +84,8 @@ public class CustomRealm extends AuthorizingRealm {
             return null;
         }
 
-        return new SimpleAuthenticationInfo(userName, password, "customRealm");
-    }
-
-    /**
-     * 模拟数据库查询凭证
-     */
-    private String getPasswordByUserName(String userName) {
-        return userMap.get(userName);
+        SimpleAuthenticationInfo simpleAuthorizationInfo = new SimpleAuthenticationInfo(userName, password, "customRealm");
+        simpleAuthorizationInfo.setCredentialsSalt(ByteSource.Util.bytes("GYX"));
+        return simpleAuthorizationInfo;
     }
 }
