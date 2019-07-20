@@ -59,7 +59,7 @@ public class MyConsumer {
         }
     }
 
-    private static void generalConsumeMessageSyncCommit() {
+    private static void generalConsumeMessageAsyncCommit() {
         properties.put("enable.auto.commit", false);
         consumer = new KafkaConsumer<>(properties);
 
@@ -69,7 +69,8 @@ public class MyConsumer {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
             boolean flag = processRecords(records);
             try {
-                consumer.commitSync();
+                // 无法重试或者处理提交失败
+                consumer.commitAsync();
             } catch (CommitFailedException e) {
                 System.out.println("commit failed error: " + e.getMessage());
             }
@@ -81,6 +82,6 @@ public class MyConsumer {
     }
 
     public static void main(String[] args) {
-        generalConsumeMessageSyncCommit();
+        generalConsumeMessageAsyncCommit();
     }
 }
