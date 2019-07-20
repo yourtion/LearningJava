@@ -1,5 +1,6 @@
 package com.yourtion.kafka.study;
 
+import org.apache.kafka.clients.consumer.CommitFailedException;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -25,6 +26,20 @@ public class MyConsumer {
 
     }
 
+    private static boolean processRecords(ConsumerRecords<String, String> records) {
+        boolean flag = true;
+        for (ConsumerRecord<String, String> record : records) {
+            System.out.println(String.format(
+                    "topic = %s, partition = %s, key = %s, value = %s",
+                    record.topic(), record.partition(), record.key(), record.value())
+            );
+            if (record.value().equals(DONE_TAG)) {
+                flag = false;
+            }
+        }
+        return flag;
+    }
+
     private static void generalConsumeMessageAutoCommit() {
         properties.put("enable.auto.commit", true);
         consumer = new KafkaConsumer<>(properties);
@@ -33,19 +48,8 @@ public class MyConsumer {
 
         try {
             while (true) {
-
-                boolean flag = true;
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
-
-                for (ConsumerRecord<String, String> record : records) {
-                    System.out.println(String.format(
-                            "topic = %s, partition = %s, key = %s, value = %s",
-                            record.topic(), record.partition(), record.key(), record.value())
-                    );
-                    if (record.value().equals(DONE_TAG)) {
-                        flag = false;
-                    }
-                }
+                boolean flag = processRecords(records);
                 if (!flag) {
                     break;
                 }
@@ -55,7 +59,28 @@ public class MyConsumer {
         }
     }
 
+    private static void generalConsumeMessageSyncCommit() {
+        properties.put("enable.auto.commit", false);
+        consumer = new KafkaConsumer<>(properties);
+
+        consumer.subscribe(Collections.singleton("yourtion-kafka-study-x"));
+
+        while (true) {
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+            boolean flag = processRecords(records);
+            try {
+                consumer.commitSync();
+            } catch (CommitFailedException e) {
+                System.out.println("commit failed error: " + e.getMessage());
+            }
+            if (!flag) {
+                break;
+            }
+        }
+        consumer.close();
+    }
+
     public static void main(String[] args) {
-        generalConsumeMessageAutoCommit();
+        generalConsumeMessageSyncCommit();
     }
 }
