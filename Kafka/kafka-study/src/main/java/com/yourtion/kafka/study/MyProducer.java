@@ -80,6 +80,7 @@ public class MyProducer {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        sendMessage("name-z", "done");
         sendMessageCallback();
     }
 
