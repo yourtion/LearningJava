@@ -59,7 +59,7 @@ public class MyConsumer {
         }
     }
 
-    private static void generalConsumeMessageAsyncCommit() {
+    private static void generalConsumeMessageSyncCommit() {
         properties.put("enable.auto.commit", false);
         consumer = new KafkaConsumer<>(properties);
 
@@ -69,8 +69,7 @@ public class MyConsumer {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
             boolean flag = processRecords(records);
             try {
-                // 无法重试或者处理提交失败
-                consumer.commitAsync();
+                consumer.commitSync();
             } catch (CommitFailedException e) {
                 System.out.println("commit failed error: " + e.getMessage());
             }
@@ -81,7 +80,30 @@ public class MyConsumer {
         consumer.close();
     }
 
+    private static void generalConsumeMessageAsyncCommitWithCallback() {
+        properties.put("enable.auto.commit", false);
+        consumer = new KafkaConsumer<>(properties);
+
+        consumer.subscribe(Collections.singleton("yourtion-kafka-study-x"));
+
+        while (true) {
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+            boolean flag = processRecords(records);
+
+            consumer.commitAsync((map, e) -> {
+                if (e != null) {
+                    System.out.println("commit failed for offset: " + e.getMessage());
+                }
+            });
+
+            if (!flag) {
+                break;
+            }
+        }
+        consumer.close();
+    }
+
     public static void main(String[] args) {
-        generalConsumeMessageAsyncCommit();
+        generalConsumeMessageAsyncCommitWithCallback();
     }
 }
