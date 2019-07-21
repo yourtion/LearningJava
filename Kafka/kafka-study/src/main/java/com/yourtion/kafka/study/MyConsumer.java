@@ -103,7 +103,34 @@ public class MyConsumer {
         consumer.close();
     }
 
+    private static void mixSyncAndAsyncCommit() {
+        properties.put("enable.auto.commit", false);
+        consumer = new KafkaConsumer<>(properties);
+
+        consumer.subscribe(Collections.singleton("yourtion-kafka-study-x"));
+
+        try {
+            while (true) {
+                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+                boolean flag = processRecords(records);
+                consumer.commitAsync();
+                if (!flag) {
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("commit failed error: " + e.getMessage());
+        } finally {
+            // 捕获异步提交异常，尝试同步提交保证提交结果
+            try {
+                consumer.commitSync();
+            } finally {
+                consumer.close();
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        generalConsumeMessageAsyncCommitWithCallback();
+        mixSyncAndAsyncCommit();
     }
 }
