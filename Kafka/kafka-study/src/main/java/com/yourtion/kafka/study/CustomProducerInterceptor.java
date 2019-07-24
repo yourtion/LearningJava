@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * @author yourtion
  */
-public class CustomInterceptor implements ProducerInterceptor<String, String> {
+public class CustomProducerInterceptor implements ProducerInterceptor<String, String> {
     public static final String PREFIX = "y-";
     private AtomicInteger sendSuccess = new AtomicInteger();
     private AtomicInteger sendFailure = new AtomicInteger();
