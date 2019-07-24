@@ -8,10 +8,12 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * 自定义生产者拦截器
+ * 给消息体内容加上 y- 前缀，统计发送成功率
  * @author yourtion
  */
 public class CustomProducerInterceptor implements ProducerInterceptor<String, String> {
-    public static final String PREFIX = "y-";
+    private static final String PREFIX = "y-";
     private AtomicInteger sendSuccess = new AtomicInteger();
     private AtomicInteger sendFailure = new AtomicInteger();
 
