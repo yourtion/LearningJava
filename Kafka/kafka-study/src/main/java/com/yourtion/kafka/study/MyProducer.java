@@ -11,6 +11,7 @@ import java.util.Properties;
 public class MyProducer {
 
     private static KafkaProducer<String, String> producer;
+    private static final long EXPIRE_INTERVAL = 10 * 1000;
 
     static {
         Properties properties = new Properties();
@@ -26,7 +27,15 @@ public class MyProducer {
     private static void sendMessageForgetResult() {
 
         ProducerRecord<String, String> record = new ProducerRecord<>(
-                "yourtion-kafka-study", "name", "ForgetResult"
+                "yourtion-kafka-study", 0, System.currentTimeMillis() - EXPIRE_INTERVAL, "name", "first-expire-data"
+        );
+        producer.send(record);
+        record = new ProducerRecord<>(
+                "yourtion-kafka-study", "name", "normal-data"
+        );
+        producer.send(record);
+        record = new ProducerRecord<>(
+                "yourtion-kafka-study", 0, System.currentTimeMillis() - EXPIRE_INTERVAL, "name", "last-expire-data"
         );
         producer.send(record);
         producer.close();
@@ -67,7 +76,7 @@ public class MyProducer {
         // 命令行消费：kafka-console-consumer --bootstrap-server localhost:9092 --topic yourtion-kafka-study --from-beginning
         // 创建topic：kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 5 --topic yourtion-kafka-study-x
 
-//        sendMessageForgetResult();
+        sendMessageForgetResult();
 //        sendMessageSync();
         sendMessage("name", "sendMessage-name");
         sendMessage("name-x", "sendMessage-name-x");

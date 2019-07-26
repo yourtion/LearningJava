@@ -40,9 +40,10 @@ public class MyConsumer {
 
     private static void generalConsumeMessageAutoCommit() {
         properties.put("enable.auto.commit", true);
+        properties.put(ConsumerConfig.INTERCEPTOR_CLASSES_CONFIG, CustomConsumerInterceptor.class.getName());
         consumer = new KafkaConsumer<>(properties);
 
-        consumer.subscribe(Collections.singleton("yourtion-kafka-study-x"));
+        consumer.subscribe(Collections.singleton("yourtion-kafka-study"));
 
         try {
             while (true) {
@@ -129,6 +130,6 @@ public class MyConsumer {
     }
 
     public static void main(String[] args) {
-        mixSyncAndAsyncCommit();
+        generalConsumeMessageAutoCommit();
     }
 }
