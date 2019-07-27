@@ -76,7 +76,7 @@ public class MyProducer {
         // 命令行消费：kafka-console-consumer --bootstrap-server localhost:9092 --topic yourtion-kafka-study --from-beginning
         // 创建topic：kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 5 --topic yourtion-kafka-study-x
 
-        sendMessageForgetResult();
+//        sendMessageForgetResult();
 //        sendMessageSync();
         sendMessage("name", "sendMessage-name");
         sendMessage("name-x", "sendMessage-name-x");

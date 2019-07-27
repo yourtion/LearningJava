@@ -21,7 +21,6 @@ public class MyConsumer {
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "KafkaStudy");
-
     }
 
     private static boolean processRecords(ConsumerRecords<String, String> records) {
