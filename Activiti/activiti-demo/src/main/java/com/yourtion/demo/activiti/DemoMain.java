@@ -4,9 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.DeploymentBuilder;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.runtime.ProcessInstance;
 
 /**
  * @author yourtion
@@ -35,6 +37,10 @@ public class DemoMain {
         log.info("流程定义文件 【{}】， 流程ID 【{}】", processDefinition.getName(), processDefinition.getId());
 
         // 启动运行流程
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinition.getId());
+        log.info("启动流程 【{}】", processInstance.getProcessDefinitionKey());
+
         // 处理流程任务
         log.info("结束我们的程序");
     }
