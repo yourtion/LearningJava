@@ -1,14 +1,14 @@
 package com.yourtion.demo.activiti;
 
 import lombok.extern.slf4j.Slf4j;
-import org.activiti.engine.ProcessEngine;
-import org.activiti.engine.ProcessEngineConfiguration;
-import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
+import org.activiti.engine.*;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.DeploymentBuilder;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
+
+import java.util.List;
 
 /**
  * @author yourtion
@@ -42,6 +42,13 @@ public class DemoMain {
         log.info("启动流程 【{}】", processInstance.getProcessDefinitionKey());
 
         // 处理流程任务
+        TaskService taskService = processEngine.getTaskService();
+        List<Task> list = taskService.createTaskQuery().list();
+        log.info("待处理任务数量【{}】", list.size());
+        for (Task task : list) {
+            log.info("待处理任务【{}】", task.getName());
+        }
+
         log.info("结束我们的程序");
     }
 
