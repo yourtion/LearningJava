@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+
+    <process id="my-process">
+
+        <startEvent id="startEvent" name="Start Event"/>
+        <userTask id="commonTask" name="Common Task"/>
+        <boundaryEvent attachedToRef="commonTask" id="boundaryEvent"
+                       name="Timer" cancelActivity="true">
+            <timerEventDefinition>
+                <timeDuration>PT5S</timeDuration>
+            </timerEventDefinition>
+        </boundaryEvent>
+        <userTask id="timeoutTask" name="Timeout Task"/>
+        <endEvent id="end1"/>
+        <endEvent id="end2"/>
+
+        <sequenceFlow sourceRef="startEvent" targetRef="commonTask"/>
+        <sequenceFlow sourceRef="commonTask" targetRef="end1"/>
+        <sequenceFlow sourceRef="boundaryEvent" targetRef="timeoutTask"/>
+        <sequenceFlow sourceRef="timeoutTask" targetRef="end2"/>
+    </process>
+
+</definitions>
