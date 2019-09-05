@@ -11,6 +11,6 @@
         <property name="jdbcPassword" value=""/>
 
         <property name="asyncExecutorActivate" value="true"/>
-        <property name="enableVerboseExecutionTreeLogging" value="true"/>
+        <property name="enableVerboseExecutionTreeLogging" value="false"/>
     </bean>
 </beans>
