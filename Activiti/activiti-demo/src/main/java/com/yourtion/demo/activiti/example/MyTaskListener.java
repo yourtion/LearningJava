@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.delegate.TaskListener;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
 /**
@@ -13,12 +14,18 @@ import org.joda.time.DateTime;
 public class MyTaskListener implements TaskListener {
     @Override
     public void notify(DelegateTask delegateTask) {
-        log.info("config by listener");
+        String eventName = delegateTask.getEventName();
 
-        delegateTask.addCandidateUsers(Lists.newArrayList("user1", "user2"));
-        delegateTask.addCandidateGroup("group1");
+        if (StringUtils.equals("create", eventName)) {
+            log.info("config by listener");
 
-        delegateTask.setVariable("key1", "value1");
-        delegateTask.setDueDate(DateTime.now().plusDays(3).toDate());
+            delegateTask.addCandidateUsers(Lists.newArrayList("user1", "user2"));
+            delegateTask.addCandidateGroup("group1");
+
+            delegateTask.setVariable("key1", "value1");
+            delegateTask.setDueDate(DateTime.now().plusDays(3).toDate());
+        } else if (StringUtils.equals("complete", eventName)) {
+            log.info("task complete");
+        }
     }
 }

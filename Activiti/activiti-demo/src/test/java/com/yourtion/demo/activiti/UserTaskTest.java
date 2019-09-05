@@ -9,8 +9,6 @@ import org.activiti.engine.test.Deployment;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.util.Map;
-
 import static junit.framework.Assert.assertNull;
 import static junit.framework.TestCase.assertEquals;
 
@@ -67,26 +65,6 @@ public class UserTaskTest {
         log.info("find by user1 task = {}", task);
         assertEquals("User Task", task.getName());
 
-        task = taskService.createTaskQuery().taskCandidateUser("user2").singleResult();
-        log.info("find by user2 task = {}", task);
-        assertEquals("User Task", task.getName());
-
-        task = taskService.createTaskQuery().taskCandidateGroup("group1").singleResult();
-        log.info("find by group1 task = {}", task);
-        assertEquals("User Task", task.getName());
-
-        taskService.claim(task.getId(), "user2");
-//        taskService.setAssignee(task.getId(), "user2");
-        task = taskService.createTaskQuery().taskCandidateOrAssigned("user1").singleResult();
-        log.info("find by user1 task = {}", task);
-        assertNull(task);
-
-        task = taskService.createTaskQuery().taskCandidateOrAssigned("user2").singleResult();
-        log.info("find by user2 task = {}", task);
-        assertEquals("User Task", task.getName());
-
-        task = taskService.createTaskQuery().taskCandidateGroup("group1").singleResult();
-        log.info("find by group1 task = {}", task);
-        assertNull(task);
+        taskService.complete(task.getId());
     }
 }
