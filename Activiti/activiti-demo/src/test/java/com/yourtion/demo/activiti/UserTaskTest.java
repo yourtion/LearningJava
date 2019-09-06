@@ -9,8 +9,8 @@ import org.activiti.engine.test.Deployment;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertNull;
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNull;
 
 
 @Slf4j
@@ -23,7 +23,7 @@ public class UserTaskTest {
 
     @Test
     @Deployment(resources = {"user-task.bpmn20.xml"})
-    public void testUserTask() throws InterruptedException {
+    public void testUserTask() {
         ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(KEY);
         TaskService taskService = activitiRule.getTaskService();
 
@@ -57,7 +57,7 @@ public class UserTaskTest {
 
     @Test
     @Deployment(resources = {"user-task2.bpmn20.xml"})
-    public void testUserTask2() throws InterruptedException {
+    public void testUserTask2() {
         ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(KEY);
         TaskService taskService = activitiRule.getTaskService();
 
