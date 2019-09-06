@@ -2,8 +2,7 @@
 
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
              xmlns:activiti="http://activiti.org/bpmn"
-             typeLanguage="http://www.w3.org/2001/XMLSchema"
-             expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+             targetNamespace="http://www.activiti.org/test">
 
     <error id="notEnoughInfoError" errorCode="not_enough_info"/>
 
@@ -63,8 +62,8 @@
 		</subProcess>
 		<sequenceFlow id="flow10" sourceRef="reviewSalesLeadSubProcess" targetRef="storeLeadInCrmSystem"/>
 
-		<boundaryEvent attachedToRef="reviewSalesLeadSubProcess" cancelActivity="true" id="catchNotEnoughInformationError">
-			<errorEventDefinition errorRef="notEnoughInfoError"/>
+        <boundaryEvent attachedToRef="reviewSalesLeadSubProcess" id="catchNotEnoughInformationError">
+            <errorEventDefinition errorRef="notEnoughInfoError"/>
 		</boundaryEvent>
 		<sequenceFlow id="flow11" sourceRef="catchNotEnoughInformationError" targetRef="provideAdditionalDetails"/>
 

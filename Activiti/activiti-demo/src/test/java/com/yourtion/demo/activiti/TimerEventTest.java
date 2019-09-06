@@ -16,13 +16,13 @@ import static org.junit.Assert.assertEquals;
 @Slf4j
 public class TimerEventTest {
 
-    public static final String KEY = "my-process";
+    private static final String KEY = "my-process";
 
     @Rule
     public ActivitiRule activitiRule = new ActivitiRule();
 
     @Test
-    @Deployment(resources = {"timer-boundary.bpmn20.xml"})
+    @Deployment(resources = {"p-timer-boundary.bpmn20.xml"})
     public void testTimerBoundary() throws InterruptedException {
         ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(KEY);
         List<Task> tasks = activitiRule.getTaskService().createTaskQuery().listPage(0, 100);

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
-             typeLanguage="http://www.w3.org/2001/XMLSchema"
-             expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+             targetNamespace="http://www.activiti.org/test">
 
     <process id="my-process">
 
         <startEvent id="startEvent" name="Start Event"/>
         <userTask id="commonTask" name="Common Task"/>
         <boundaryEvent attachedToRef="commonTask" id="boundaryEvent"
-                       name="Timer" cancelActivity="true">
+                       name="Timer">
             <timerEventDefinition>
                 <timeDuration>PT5S</timeDuration>
             </timerEventDefinition>

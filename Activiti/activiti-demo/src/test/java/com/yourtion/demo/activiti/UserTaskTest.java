@@ -16,13 +16,13 @@ import static junit.framework.TestCase.assertNull;
 @Slf4j
 public class UserTaskTest {
 
-    public static final String KEY = "my-process";
+    private static final String KEY = "my-process";
 
     @Rule
     public ActivitiRule activitiRule = new ActivitiRule();
 
     @Test
-    @Deployment(resources = {"user-task.bpmn20.xml"})
+    @Deployment(resources = {"p-user-task1.bpmn20.xml"})
     public void testUserTask() {
         ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(KEY);
         TaskService taskService = activitiRule.getTaskService();
@@ -56,7 +56,7 @@ public class UserTaskTest {
     }
 
     @Test
-    @Deployment(resources = {"user-task2.bpmn20.xml"})
+    @Deployment(resources = {"p-user-task2.bpmn20.xml"})
     public void testUserTask2() {
         ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(KEY);
         TaskService taskService = activitiRule.getTaskService();
