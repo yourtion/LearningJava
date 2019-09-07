@@ -9,6 +9,9 @@ import org.activiti.engine.test.Deployment;
 import org.junit.Rule;
 import org.junit.Test;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,7 +43,6 @@ public class ScriptTaskTest {
         }
         log.info("Variables.size= {}", historicVariableInstanceList.size());
         assertEquals(1, historicVariableInstanceList.size());
-
     }
 
     @Test
@@ -64,7 +66,6 @@ public class ScriptTaskTest {
         }
         log.info("Variables.size= {}", historicVariableInstanceList.size());
         assertEquals(3, historicVariableInstanceList.size());
-
     }
 
     @Test
@@ -88,6 +89,15 @@ public class ScriptTaskTest {
         }
         log.info("Variables.size= {}", historicVariableInstanceList.size());
         assertEquals(3, historicVariableInstanceList.size());
+    }
 
+    @Test
+    public void testScriptEngine() throws ScriptException {
+        ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
+        ScriptEngine scriptEngine = scriptEngineManager.getEngineByName("juel");
+
+        Object eval = scriptEngine.eval("${3+5}");
+        log.info("value = {}", eval);
+        assertEquals(Long.parseLong("8"), eval);
     }
 }
