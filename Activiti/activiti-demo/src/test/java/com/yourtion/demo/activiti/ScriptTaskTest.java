@@ -9,6 +9,7 @@ import org.activiti.engine.test.Deployment;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -22,8 +23,30 @@ public class ScriptTaskTest {
 
     @Test
     @Deployment(resources = {"p-script-task1.bpmn20.xml"})
-    public void testScriptTask() {
+    public void testScriptTask1() {
         ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(KEY);
+        HistoryService historyService = activitiRule.getHistoryService();
+
+        List<HistoricVariableInstance> historicVariableInstanceList = historyService
+                .createHistoricVariableInstanceQuery()
+                .processInstanceId(processInstance.getId())
+                .orderByVariableName()
+                .asc().list();
+
+        for (HistoricVariableInstance historicVariableInstance : historicVariableInstanceList) {
+            log.info("Variable = {}", historicVariableInstance);
+        }
+        log.info("Variables.size= {}", historicVariableInstanceList.size());
+    }
+
+    @Test
+    @Deployment(resources = {"p-script-task2.bpmn20.xml"})
+    public void testScriptTask2() {
+        HashMap<String, Object> variables = new HashMap<>();
+        variables.put("key1", 3);
+        variables.put("key2", 5);
+
+        ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(KEY, variables);
         HistoryService historyService = activitiRule.getHistoryService();
 
         List<HistoricVariableInstance> historicVariableInstanceList = historyService
