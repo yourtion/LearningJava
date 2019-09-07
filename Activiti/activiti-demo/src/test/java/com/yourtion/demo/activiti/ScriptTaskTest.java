@@ -12,6 +12,8 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.List;
 
+import static junit.framework.TestCase.assertEquals;
+
 
 @Slf4j
 public class ScriptTaskTest {
@@ -37,6 +39,8 @@ public class ScriptTaskTest {
             log.info("Variable = {}", historicVariableInstance);
         }
         log.info("Variables.size= {}", historicVariableInstanceList.size());
+        assertEquals(1, historicVariableInstanceList.size());
+
     }
 
     @Test
@@ -59,5 +63,31 @@ public class ScriptTaskTest {
             log.info("Variable = {}", historicVariableInstance);
         }
         log.info("Variables.size= {}", historicVariableInstanceList.size());
+        assertEquals(3, historicVariableInstanceList.size());
+
+    }
+
+    @Test
+    @Deployment(resources = {"p-script-task3.bpmn20.xml"})
+    public void testScriptTask3() {
+        HashMap<String, Object> variables = new HashMap<>();
+        variables.put("key1", 3);
+        variables.put("key2", 5);
+
+        ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(KEY, variables);
+        HistoryService historyService = activitiRule.getHistoryService();
+
+        List<HistoricVariableInstance> historicVariableInstanceList = historyService
+                .createHistoricVariableInstanceQuery()
+                .processInstanceId(processInstance.getId())
+                .orderByVariableName()
+                .desc().list();
+
+        for (HistoricVariableInstance historicVariableInstance : historicVariableInstanceList) {
+            log.info("Variable = {}", historicVariableInstance);
+        }
+        log.info("Variables.size= {}", historicVariableInstanceList.size());
+        assertEquals(3, historicVariableInstanceList.size());
+
     }
 }
