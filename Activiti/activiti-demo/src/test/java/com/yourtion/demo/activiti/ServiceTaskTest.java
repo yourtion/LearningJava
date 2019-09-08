@@ -13,10 +13,11 @@ import org.activiti.engine.test.Deployment;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.*;
 
 
 @Slf4j
@@ -40,7 +41,6 @@ public class ServiceTaskTest {
             log.info("activity = {}", activityInstance);
         }
         assertEquals(3, activityInstances.size());
-
     }
 
     @Test
@@ -76,7 +76,14 @@ public class ServiceTaskTest {
             log.info("activity = {}", activityInstance);
         }
         assertEquals(3, activityInstances.size());
+    }
 
-
+    @Test
+    @Deployment(resources = {"p-service-task3.bpmn20.xml"})
+    public void testServiceTask3() {
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("desc", "the test java delegate");
+        ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(KEY, variables);
+        assertTrue(processInstance.isEnded());
     }
 }
