@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions xmlns:activiti="http://activiti.org/bpmn"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             targetNamespace="http://www.activiti.org/test">
+
+    <process id="my-process">
+
+        <startEvent id="start"/>
+        <sequenceFlow id="flow1" sourceRef="start" targetRef="someTask"/>
+
+        <serviceTask id="someTask" name="Service Task MyJavaBean.sayHello"
+                     activiti:expression="${myJavaBean.sayHello()}"/>
+        <serviceTask id="someTask2" name="Service Task MyJavaBean.name"
+                     activiti:expression="${myJavaBean.name}"/>
+        <sequenceFlow id="flow2" sourceRef="someTask" targetRef="someTask2"/>
+        <sequenceFlow id="flow3" sourceRef="someTask2" targetRef="end"/>
+
+        <endEvent id="end"/>
+
+    </process>
+
+</definitions>

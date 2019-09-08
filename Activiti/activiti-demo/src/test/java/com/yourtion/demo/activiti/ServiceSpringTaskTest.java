@@ -1,5 +1,6 @@
 package com.yourtion.demo.activiti;
 
+import com.yourtion.demo.activiti.example.MyJavaBean;
 import com.yourtion.demo.activiti.example.MyJavaDelegate;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.HistoryService;
@@ -65,4 +66,24 @@ public class ServiceSpringTaskTest {
         }
         assertEquals(3, activityInstances.size());
     }
+
+    @Test
+    @Deployment(resources = {"p-service-task5.bpmn20.xml"})
+    public void testServiceTask3() {
+        Map<String, Object> variables = new HashMap<>();
+        MyJavaBean myJavaBean = new MyJavaBean("YourtionGuo");
+        log.info("myJavaBean = {}", myJavaBean);
+        variables.put("myJavaBean", myJavaBean);
+        ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(KEY, variables);
+        HistoryService historyService = activitiRule.getHistoryService();
+        List<HistoricActivityInstance> activityInstances = historyService.createHistoricActivityInstanceQuery()
+                .orderByHistoricActivityInstanceEndTime()
+                .asc().list();
+
+        for (HistoricActivityInstance activityInstance : activityInstances) {
+            log.info("activity = {}", activityInstance);
+        }
+        assertEquals(4, activityInstances.size());
+    }
+
 }
