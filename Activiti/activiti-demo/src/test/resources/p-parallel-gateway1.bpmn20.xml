@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             targetNamespace="http://www.activiti.org/test">
+
+    <process id="my-process">
+
+        <startEvent id="start"/>
+        <parallelGateway id="parallelStart"/>
+        <userTask id="task1" name="确认支付"/>
+        <userTask id="task2" name="确认收货"/>
+        <parallelGateway id="parallelEnd"/>
+        <userTask id="task3" name="订单完成"/>
+        <endEvent id="end"/>
+
+        <sequenceFlow id="flow1" sourceRef="start" targetRef="parallelStart"/>
+        <sequenceFlow id="flow2" sourceRef="parallelStart" targetRef="task1"/>
+        <sequenceFlow id="flow3" sourceRef="parallelStart" targetRef="task2"/>
+        <sequenceFlow id="flow4" sourceRef="task1" targetRef="parallelEnd"/>
+        <sequenceFlow id="flow5" sourceRef="task2" targetRef="parallelEnd"/>
+        <sequenceFlow id="flow6" sourceRef="parallelEnd" targetRef="task3"/>
+        <sequenceFlow id="flow7" sourceRef="task3" targetRef="end"/>
+
+    </process>
+
+</definitions>

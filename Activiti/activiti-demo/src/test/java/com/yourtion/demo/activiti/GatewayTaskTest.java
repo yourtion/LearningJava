@@ -9,6 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.testng.collections.Maps;
 
+import java.util.List;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
@@ -42,5 +43,25 @@ public class GatewayTaskTest {
         Task task = activitiRule.getTaskService().createTaskQuery().singleResult();
         log.info("task.name = {}", task.getName());
         assertEquals("普通", task.getName());
+    }
+
+    @Test
+    @Deployment(resources = {"p-parallel-gateway1.bpmn20.xml"})
+    public void testParallelGateway1() {
+        ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(KEY);
+        List<Task> taskList = activitiRule.getTaskService()
+                .createTaskQuery()
+                .processInstanceId(processInstance.getId())
+                .listPage(0, 100);
+        for (Task task : taskList) {
+            log.info("task.name = {}", task.getName());
+            activitiRule.getTaskService().complete(task.getId());
+        }
+        log.info("task.size = {}", taskList.size());
+        assertEquals(2, taskList.size());
+
+        Task task = activitiRule.getTaskService().createTaskQuery().singleResult();
+        log.info("task.name = {}", task.getName());
+        assertEquals("订单完成", task.getName());
     }
 }
