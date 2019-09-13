@@ -43,4 +43,15 @@ public class SubProcessTaskTest {
         assertEquals("异常处理", task.getName());
     }
 
+    @Test
+    @Deployment(resources = {"p-sub-process2.bpmn20.xml"})
+    public void testSubProcess3() {
+        Map<String, Object> variables = Maps.newHashMap();
+        variables.put(ERROR_FLAG, true);
+        ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(KEY, variables);
+        Task task = activitiRule.getTaskService().createTaskQuery().singleResult();
+        log.info("task.name = {}", task.getName());
+        assertEquals("异常处理", task.getName());
+    }
+
 }

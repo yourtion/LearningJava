@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions xmlns:activiti="http://activiti.org/bpmn"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             targetNamespace="http://www.activiti.org/test">
+
+    <process id="my-process">
+
+        <startEvent id="start"/>
+        <parallelGateway id="parallelStart"/>
+        <serviceTask id="pay" name="确认支付" activiti:class="com.yourtion.demo.activiti.example.MyPayJavaDelegate"/>
+        <serviceTask id="take" name="确认收货" activiti:class="com.yourtion.demo.activiti.example.MyTakeJavaDelegate"/>
+        <parallelGateway id="parallelEnd"/>
+        <userTask id="orderComplete" name="订单完成"/>
+        <endEvent id="end"/>
+
+        <subProcess id="subProcess" triggeredByEvent="true">
+            <startEvent id="startSub">
+                <errorEventDefinition errorRef="bpmnError"/>
+            </startEvent>
+            <userTask id="orderError" name="异常处理"/>
+            <endEvent id="endSub"/>
+
+            <sequenceFlow id="subFlow1" sourceRef="startSub" targetRef="orderError"/>
+            <sequenceFlow id="subFlow2" sourceRef="orderError" targetRef="endSub"/>
+        </subProcess>
+
+        <sequenceFlow id="flow1" sourceRef="start" targetRef="parallelStart"/>
+        <sequenceFlow id="flow2" sourceRef="parallelStart" targetRef="pay"/>
+        <sequenceFlow id="flow3" sourceRef="parallelStart" targetRef="take"/>
+        <sequenceFlow id="flow4" sourceRef="pay" targetRef="parallelEnd"/>
+        <sequenceFlow id="flow5" sourceRef="take" targetRef="parallelEnd"/>
+        <sequenceFlow id="flow6" sourceRef="parallelEnd" targetRef="orderComplete"/>
+        <sequenceFlow id="flow7" sourceRef="orderComplete" targetRef="end"/>
+
+    </process>
+
+</definitions>
