@@ -12,7 +12,9 @@ import org.testng.collections.Maps;
 import java.util.Map;
 
 import static com.yourtion.demo.activiti.example.MyPayJavaDelegate.ERROR_FLAG;
+import static com.yourtion.demo.activiti.example.MyPayJavaDelegate.KEY2;
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNull;
 
 
 @Slf4j
@@ -41,6 +43,11 @@ public class SubProcessTaskTest {
         Task task = activitiRule.getTaskService().createTaskQuery().singleResult();
         log.info("task.name = {}", task.getName());
         assertEquals("异常处理", task.getName());
+
+        Map<String, Object> vars = activitiRule.getRuntimeService().getVariables(processInstance.getId());
+        log.info("vars = {}", vars);
+        Object v2 = vars.get(KEY2);
+        assertNull(v2);
     }
 
     @Test
@@ -52,6 +59,11 @@ public class SubProcessTaskTest {
         Task task = activitiRule.getTaskService().createTaskQuery().singleResult();
         log.info("task.name = {}", task.getName());
         assertEquals("异常处理", task.getName());
+
+        Map<String, Object> vars = activitiRule.getRuntimeService().getVariables(processInstance.getId());
+        log.info("vars = {}", vars);
+        Object v2 = vars.get(KEY2);
+        assertEquals("value2", v2);
     }
 
 }
