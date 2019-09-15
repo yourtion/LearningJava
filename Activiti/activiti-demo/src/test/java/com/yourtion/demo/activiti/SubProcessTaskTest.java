@@ -11,8 +11,7 @@ import org.testng.collections.Maps;
 
 import java.util.Map;
 
-import static com.yourtion.demo.activiti.example.MyPayJavaDelegate.ERROR_FLAG;
-import static com.yourtion.demo.activiti.example.MyPayJavaDelegate.KEY2;
+import static com.yourtion.demo.activiti.example.MyPayJavaDelegate.*;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 
@@ -64,6 +63,45 @@ public class SubProcessTaskTest {
         log.info("vars = {}", vars);
         Object v2 = vars.get(KEY2);
         assertEquals("value2", v2);
+    }
+
+    @Test
+    @Deployment(resources = {"p-sub-process3.bpmn20.xml", "p-sub-process4.bpmn20.xml"})
+    public void testSubProcess4() {
+        ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(KEY);
+        Task task = activitiRule.getTaskService().createTaskQuery().singleResult();
+        log.info("task.name = {}", task.getName());
+        assertEquals("订单完成", task.getName());
+
+        // 只有 KEY1 可以传出来
+        Map<String, Object> vars = activitiRule.getRuntimeService().getVariables(processInstance.getId());
+        log.info("vars = {}", vars);
+        Object v3 = vars.get(KEY3);
+        assertNull(v3);
+        Object v1 = vars.get(KEY1);
+        assertEquals("value1", v1);
+    }
+
+    @Test
+    @Deployment(resources = {"p-sub-process3.bpmn20.xml", "p-sub-process4.bpmn20.xml"})
+    public void testSubProcess5() {
+        Map<String, Object> variables = Maps.newHashMap();
+        variables.put(ERROR_FLAG, true);
+        variables.put("key0", "value0");
+        ProcessInstance processInstance = activitiRule.getRuntimeService().startProcessInstanceByKey(KEY, variables);
+        Task task = activitiRule.getTaskService().createTaskQuery().singleResult();
+        log.info("task.name = {}", task.getName());
+        assertEquals("异常处理", task.getName());
+
+        // 没有数据可以出来
+        Map<String, Object> vars = activitiRule.getRuntimeService().getVariables(processInstance.getId());
+        log.info("vars = {}", vars);
+        Object v3 = vars.get(KEY3);
+        assertNull(v3);
+        Object v1 = vars.get(KEY1);
+        assertNull(v1);
+        Object v2 = vars.get(KEY2);
+        assertNull(v2);
     }
 
 }

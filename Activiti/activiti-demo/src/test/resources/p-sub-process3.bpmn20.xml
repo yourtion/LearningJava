@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions xmlns:activiti="http://activiti.org/bpmn"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             targetNamespace="http://www.activiti.org/test">
+
+    <process id="my-process">
+
+        <startEvent id="start"/>
+        <callActivity id="callActivity" calledElement="my-process-check-order">
+            <extensionElements>
+                <activiti:in source="errorFlag" target="errorFlag"/>
+                <activiti:out source="key1" target="key1"/>
+            </extensionElements>
+        </callActivity>
+        <boundaryEvent id="boundary" attachedToRef="callActivity">
+            <errorEventDefinition errorRef="bpmnError"/>
+        </boundaryEvent>
+        <userTask id="orderComplete" name="订单完成"/>
+        <userTask id="orderError" name="异常处理"/>
+        <endEvent id="end"/>
+
+        <sequenceFlow id="flow1" sourceRef="start" targetRef="callActivity"/>
+        <sequenceFlow id="flow2" sourceRef="callActivity" targetRef="orderComplete"/>
+        <sequenceFlow id="flow3" sourceRef="boundary" targetRef="orderError"/>
+        <sequenceFlow id="flow4" sourceRef="orderComplete" targetRef="end"/>
+        <sequenceFlow id="flow5" sourceRef="orderError" targetRef="end"/>
+
+    </process>
+
+</definitions>
