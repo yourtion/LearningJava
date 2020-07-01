@@ -7,9 +7,9 @@ package com.yourtion.java.utils.apple;
  */
 public class Apple {
     private Color color;
-    private int weight;
+    private Integer weight;
 
-    public Apple(Color color, int weight) {
+    public Apple(Color color, Integer weight) {
         this.color = color;
         this.weight = weight;
     }
@@ -22,12 +22,17 @@ public class Apple {
         this.color = color;
     }
 
-    public int getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return "Apple{color=" + color + ", weight=" + weight + "}";
     }
 
     public enum Color {
