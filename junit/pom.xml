@@ -7,6 +7,10 @@
     <groupId>com.yourtion.java</groupId>
     <artifactId>JUnit</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -15,6 +19,11 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
 </project>
