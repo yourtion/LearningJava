@@ -1,4 +1,4 @@
-package com.yourtion.java.junit;
+package com.yourtion.java.junit4;
 
 public class Count {
     /**

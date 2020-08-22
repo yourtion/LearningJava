@@ -1,4 +1,4 @@
-package com.yourtion.java.junit;
+package com.yourtion.java.junit4;
 
 import org.junit.Ignore;
 import org.junit.Test;
